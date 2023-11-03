@@ -1,50 +1,28 @@
-function SearchResultsPage({ match }) {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+
+function SearchResultsPage() {
+    const { keyword } = useParams();
     const [books, setBooks] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`/api/books/search?keyword=${match.params.keyword}`)
+        axios.get(`/api/books/search?keyword=${keyword}`)
             .then(response => setBooks(response.data));
-    }, [match.params.keyword]);
+    }, [keyword]);
 
-    function handlePlaceHold(bookId) {
-        axios.post(`/api/books/${bookId}/hold`)
-            .then(response => {
-                if(response.status === 200) {
-                    alert("Hold placed successfully");
-                } else {
-                    alert("Failed to place hold");
-                }
-            })
-            .catch(error => {
-                console.error("There was an error placing the hold:", error);
-            });
-    }
-
-    function handleCancelHold(bookId) {
-        axios.delete(`/api/books/${bookId}/cancelHold`)
-            .then(response => {
-                if(response.status === 200) {
-                    alert("Hold cancelled successfully");
-                } else {
-                    alert("Failed to cancel hold");
-                }
-            })
-            .catch(error => {
-                console.error("There was an error cancelling the hold:", error);
-            });
-    }
 
     return (
         <div>
             <h2>Search Results</h2>
             {books.map(book => (
                 <div key={book.id}>
-                    <span onClick={() => history.push(`/book/${book.id}`)}>{book.title}</span>
-                    <button onClick={() => handlePlaceHold(book.id)}>Place Hold</button>
-                    <button onClick={() => handleCancelHold(book.id)}>Cancel Hold</button>
+                    <span onClick={() => navigate(`/book/${book.id}`)}>{book.title}</span>
                 </div>
             ))}
         </div>
     );
 }
+
+export default SearchResultsPage;

@@ -1,51 +1,50 @@
-function BookDetailPage({ match }) {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+
+function BookDetailPage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [book, setBook] = useState(null);
-    const [holdInfo, setHoldInfo] = useState([]);
+    const [holds, setHolds] = useState([]);
     const [isHeldByUser, setIsHeldByUser] = useState(false); // This should be determined based on the hold info and current user
-    const history = useHistory();
+    const userId = 1;
 
     useEffect(() => {
         // Fetch book details
-        axios.get(`/api/books/${match.params.id}`)
+        axios.get(`/api/books/${id}`)
             .then(response => {
                 setBook(response.data);
-                setHoldInfo(response.data.holds); // assuming that holds are part of the book details response
-                setIsHeldByUser(response.data.holds.some(hold => hold.userId === 1)); // Assuming user ID is 1 for now
+                // 简单起见，不再返回hold info
             })
             .catch(error => {
                 console.error("There was an error fetching the book details:", error);
             });
-    }, [match.params.id]);
+    }, [id, userId]);
 
-    function handlePlaceHold() {
-        axios.post(`/api/books/${book.id}/hold`)
+    const handlePlaceHold = () => {
+        axios.post(`/api/holds`, { userId: userId, bookId: book.id })
             .then(response => {
-                if(response.status === 200) {
-                    alert("Hold placed successfully");
-                    setIsHeldByUser(true);
-                } else {
-                    alert("Failed to place hold");
-                }
+                setHolds(prevHolds => [...prevHolds, response.data]);
+                setIsHeldByUser(true);
             })
             .catch(error => {
-                console.error("There was an error placing the hold:", error);
+                console.error('Error placing a hold on the book', error);
             });
-    }
+    };
 
-    function handleCancelHold() {
-        axios.delete(`/api/books/${book.id}/cancelHold`)
-            .then(response => {
-                if(response.status === 200) {
-                    alert("Hold cancelled successfully");
-                    setIsHeldByUser(false);
-                } else {
-                    alert("Failed to cancel hold");
-                }
+    const handleCancelHold = () => {
+        const holdId = holds.find(hold => hold.userId === userId).id;
+        axios.delete(`/api/holds/${holdId}`)
+            .then(() => {
+                setHolds(prevHolds => prevHolds.filter(hold => hold.userId !== userId));
+                setIsHeldByUser(false);
             })
             .catch(error => {
-                console.error("There was an error cancelling the hold:", error);
+                console.error('Error canceling the hold on the book', error);
             });
-    }
+    };
 
     return (
         <div>
@@ -57,7 +56,7 @@ function BookDetailPage({ match }) {
                     <h3>Holds:</h3>
                     {holdInfo.map(hold => (
                         <div key={hold.id}>
-                            User ID: {hold.userId}, Date: {new Date(hold.date).toLocaleDateString()}
+                            User ID: {hold.user}, Date: {new Date(hold.holdDate).toLocaleDateString()}
                         </div>
                     ))}
                     {!isHeldByUser ? (
@@ -72,3 +71,5 @@ function BookDetailPage({ match }) {
         </div>
     );
 }
+
+export default BookDetailPage;

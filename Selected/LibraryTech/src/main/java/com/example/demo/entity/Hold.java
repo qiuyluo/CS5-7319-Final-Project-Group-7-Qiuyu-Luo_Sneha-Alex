@@ -27,7 +27,7 @@ public class Hold {
     private Date holdDate;    // Date when the hold was placed
     private boolean isReadyToPickup;
 
-    protected Hold() {
+    public Hold() {
     }
 
 

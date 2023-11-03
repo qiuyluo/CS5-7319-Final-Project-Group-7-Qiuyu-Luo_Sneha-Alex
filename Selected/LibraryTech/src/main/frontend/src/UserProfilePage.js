@@ -1,7 +1,11 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+
 function UserProfilePage() {
     const [holds, setHolds] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Assuming user ID is 1 for now
@@ -26,17 +30,19 @@ function UserProfilePage() {
         <div>
             <h2>Your Holds</h2>
             {holds.map(hold => (
-                <div key={hold.id} onClick={() => history.push(`/book/${hold.book.id}`)}>
+                <div key={hold.id} onClick={() => navigate(`/book/${hold.book.id}`)}>
                     {hold.book.title}
                 </div>
             ))}
 
             <h2>Recommendations for you</h2>
             {recommendations.map(book => (
-                <div key={book.id} onClick={() => history.push(`/book/${book.id}`)}>
+                <div key={book.id} onClick={() => navigate(`/book/${book.id}`)}>
                     {book.title}
                 </div>
             ))}
         </div>
     );
 }
+
+export default UserProfilePage;

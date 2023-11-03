@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
     const [searchTerm, setSearchTerm] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function handleSearch() {
-        history.push(`/search/${searchTerm}`);
+        navigate(`/search/${searchTerm}`);
     }
 
     return (
@@ -25,7 +25,7 @@ function LandingPage() {
             <button>Sign In</button>
 
             {/* Profile Button */}
-            <button onClick={() => history.push('/profile')}>Profile</button>
+            <button onClick={() => navigate('/profile')}>Profile</button>
         </div>
     );
 }

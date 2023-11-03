@@ -1,4 +1,5 @@
 package com.example.demo.repository;
+import com.example.demo.entity.Book;
 import com.example.demo.entity.Hold;
 import com.example.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ import java.util.List;
 @Repository
 public interface HoldRepository extends JpaRepository<Hold, Long> {
     List<Hold> findByUser(User user);
+    List<Hold> findByBook(Book book);
 }

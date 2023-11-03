@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 /**
@@ -19,6 +22,10 @@ public class Book {
     private String genre;
     private String topic;
     private String coverImage;
+    @Transient
+    @JsonIgnore
+    private List<Hold> holds;
+
 
     protected Book() {
     }
@@ -62,6 +69,14 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public List<Hold> getHolds() {
+        return holds;
+    }
+
+    public void setHolds(List<Hold> holds) {
+        this.holds = holds;
     }
 
     public void setGenre(String genre) {

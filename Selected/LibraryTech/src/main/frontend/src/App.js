@@ -9,10 +9,10 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" exact component={LandingPage} />
-                <Route path="/search/:keyword" component={SearchResultsPage} />
-                <Route path="/profile" component={UserProfilePage} />
-                <Route path="/book/:id" component={BookDetailPage} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/search/:keyword" element={<SearchResultsPage />} />
+                <Route path="/profile" element={<UserProfilePage />} />
+                <Route path="/book/:id" element={<BookDetailPage />} />
             </Routes>
         </Router>
     );
