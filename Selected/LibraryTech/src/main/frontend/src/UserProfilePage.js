@@ -9,17 +9,17 @@ function UserProfilePage() {
 
     useEffect(() => {
         // Assuming user ID is 1 for now
-        const userId = 1;
+        const userId = 4;
 
         // Fetch holds for the user
-        axios.get(`/api/users/${userId}/holds`)
+        axios.get(`/api/holds/user/${userId}`)
             .then(response => setHolds(response.data))
             .catch(error => {
                 console.error("There was an error fetching the holds:", error);
             });
 
         // Fetch book recommendations for the user
-        axios.get(`/api/users/${userId}/recommendations`)
+        axios.get(`/api/books/recommendations/${userId}`)
             .then(response => setRecommendations(response.data))
             .catch(error => {
                 console.error("There was an error fetching the recommendations:", error);

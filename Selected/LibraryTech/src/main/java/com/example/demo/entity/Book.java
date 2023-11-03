@@ -22,9 +22,6 @@ public class Book {
     private String genre;
     private String topic;
     private String coverImage;
-    @Transient
-    @JsonIgnore
-    private List<Hold> holds;
 
 
     protected Book() {
@@ -71,13 +68,6 @@ public class Book {
         this.author = author;
     }
 
-    public List<Hold> getHolds() {
-        return holds;
-    }
-
-    public void setHolds(List<Hold> holds) {
-        this.holds = holds;
-    }
 
     public void setGenre(String genre) {
         this.genre = genre;

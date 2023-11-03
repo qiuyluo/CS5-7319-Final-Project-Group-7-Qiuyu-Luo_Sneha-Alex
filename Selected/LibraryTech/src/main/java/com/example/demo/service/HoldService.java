@@ -54,5 +54,8 @@ public class HoldService {
     public void cancelHold(Long holdId) {
         holdRepository.deleteById(holdId);
     }
+    public void cancelHoldByBook(Long bookId) {
+        holdRepository.deleteByBookId(bookId);
+    }
 
 }

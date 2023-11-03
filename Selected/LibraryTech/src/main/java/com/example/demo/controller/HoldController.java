@@ -59,4 +59,16 @@ public class HoldController {
         }
     }
 
+    @DeleteMapping("/book/{bookId}")
+    public ResponseEntity<Void> deleteHoldByBookAndUser(@PathVariable Long bookId) {
+        try {
+            holdService.cancelHoldByBook(bookId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (EmptyResultDataAccessException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

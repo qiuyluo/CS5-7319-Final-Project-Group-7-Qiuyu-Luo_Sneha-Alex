@@ -34,15 +34,9 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (optionalBook.isPresent()) {
-            Book book = optionalBook.get();
-            List<Hold> holds = holdRepository.findByBook(book);
-            book.setHolds(holds); // Set the holds information
-            return book;
-        }
-        return null;
+        return bookRepository.findById(id).orElse(null);
     }
+
 
     public List<Book> searchBooksByKeyword(String keyword) {
         return bookRepository.findByTitleContainingOrAuthorContaining(keyword, keyword);

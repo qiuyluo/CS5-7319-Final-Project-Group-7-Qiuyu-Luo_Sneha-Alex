@@ -41,6 +41,19 @@ public class BookController {
         }
     }
 
+    @GetMapping("/recommendations/{userid}")
+    public ResponseEntity<List<Book>> recommendBooksForUser(@PathVariable Long userid) {
+        try {
+            List<Book> books = bookService.recommendBooksForUser(userid);
+            if (books.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping
     public Book addBook(@RequestBody Book book) {
         return bookService.saveBook(book);
