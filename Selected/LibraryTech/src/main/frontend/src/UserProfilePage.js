@@ -28,6 +28,8 @@ function UserProfilePage() {
 
     return (
         <div>
+            <h1>Welcome, Lucy!</h1>
+
             <h2>Your Holds</h2>
             {holds.map(hold => (
                 <div key={hold.id} onClick={() => navigate(`/book/${hold.book.id}`)}>

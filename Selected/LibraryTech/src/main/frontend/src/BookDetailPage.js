@@ -19,7 +19,8 @@ function BookDetailPage() {
     }, [id]);
 
     const handlePlaceHold = () => {
-        axios.post(`/api/holds`, { userId: userId, bookId: id })
+        const numericBookId = parseInt(id, 10);
+        axios.post(`/api/holds`, { userId: userId, bookId: numericBookId })
             .then(() => {
                 setIsHeldByUser(true);
             })
@@ -28,9 +29,10 @@ function BookDetailPage() {
             });
     };
 
-    const handleCancelHold = () => {
 
-        axios.delete(`/api/holds/book/${id}`)
+    const handleCancelHold = () => {
+        const numericBookId = parseInt(id, 10);
+        axios.delete(`/api/holds/book/${numericBookId}`)
             .then(() => {
                 setIsHeldByUser(false);
             })
@@ -38,6 +40,7 @@ function BookDetailPage() {
                 console.error('Error canceling the hold on the book', error);
             });
     };
+
 
     return (
         <div>

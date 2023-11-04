@@ -35,8 +35,8 @@ public class HoldController {
     @PostMapping
     public ResponseEntity<Hold> placeHold(@RequestBody Map<String, Object> payload) {
         try {
-            Long userId = Long.valueOf((Integer) payload.get("userId")); // JSON int 转为 Java Long
-            Long bookId = Long.valueOf((Integer) payload.get("bookId"));
+            Long userId = Long.valueOf(String.valueOf(payload.get("userId")));
+            Long bookId = Long.valueOf(String.valueOf(payload.get("bookId")));
 
             Hold newHold = holdService.placeHold(userId, bookId);
 

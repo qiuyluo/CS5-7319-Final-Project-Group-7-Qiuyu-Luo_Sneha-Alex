@@ -11,7 +11,7 @@ function LandingPage() {
 
     return (
         <div>
-            <h1>Welcome to Library System</h1>
+            <h1>Welcome to LibraryTech</h1>
 
             {/* Search Component */}
             <input
