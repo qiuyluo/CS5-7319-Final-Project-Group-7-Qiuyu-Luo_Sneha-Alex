@@ -76,3 +76,13 @@ Instructions for compiling the project with Maven:
 
 ```shell
 mvn clean install
+```
+
+### Access the application
+
+1. base URL: `http://localhost:8080`
+2. Upon the initial launch, a default username `user` is created, and a security password is generated and logged in the console output. Please search the console logs for `Using generated security password:` to find the temporary password.
+
+![67ac0232d3cbd9f7d1ab5475a01e18c](https://github.com/qiuyluo/CS5-7319-Final-Project-Group-7-Qiuyu-Luo_Sneha-Alex/assets/113461826/0f566204-4d5f-43aa-9422-0266512429c1)
+
+The generated password is unique to each run.
