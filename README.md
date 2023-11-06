@@ -1,8 +1,6 @@
 # CS5-7319-Final-Project-Group-7-Qiuyu-Luo_Sneha-Alex
 
-
 LibraryTech is a library website that offers personalized book recommendations based on hold history, provides basic functions such as login, book search and homepage browsing.
-
 
 ## Prerequisites
 
@@ -21,21 +19,21 @@ Instructions for setting up the development environment.
 1. Download and install Java JDK from [Download link](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 2. Install Maven from [Maven download page](https://maven.apache.org/download.cgi) and configure environment variables.
 3. Clone the repository to your local machine:
-    ```
-    git clone [repository url]
-    ```
+   ```
+   git clone [repository url]
+   ```
 
 ### Frontend (React)
 
 1. Download and install Node.js from [Node.js download page](https://nodejs.org/).
 2. Navigate to the frontend directory:
-    ```
-    cd frontend
-    ```
+   ```
+   cd frontend
+   ```
 3. Install dependencies:
-    ```
-    npm install
-    ```
+   ```
+   npm install
+   ```
 
 ### Database (PostgreSQL)
 
@@ -86,3 +84,13 @@ mvn clean install
 ![67ac0232d3cbd9f7d1ab5475a01e18c](https://github.com/qiuyluo/CS5-7319-Final-Project-Group-7-Qiuyu-Luo_Sneha-Alex/assets/113461826/0f566204-4d5f-43aa-9422-0266512429c1)
 
 The generated password is unique to each run.
+
+# Difference between two selected styles
+
+The two architecture designs we chose to implement are a two tier client-server design and a three-tier model. While both designs are similar in that they both have a set frontend and a set backend, they are significantly different in their functionality.
+The client-server design consists of a frontend and a backend. This design is simple to implement and to maintain. However, its simplicity comes with limited functionality, such as a lack of user authentication.
+In contrast, the three-tier structure has a more complex design to implement and maintain. But with this complexity comes additional functionality. The added business layer between the frontend and backend layers gives the program a faster execution time as well as the capability to handle more complex logic and fucntions.
+
+# final selection rationale
+
+In the end, we determined that the three-tier architecture was better suited to our program's needs. Despite its complexity, the three-tier architecture has added functionality that suits the requirements of our program idea. We need to be able to handle personalized user functions, which means we need to to be able t handle user authentication. This is possible with the three-tier architecture, but not with the two-tiered client-server architecture. Therefore we decided that the three-tier architecture better suits our needs.
